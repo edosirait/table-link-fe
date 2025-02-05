@@ -44,6 +44,7 @@ export class DataTableComponent implements OnInit, AfterViewInit{
     this.paginator.pageSize = this.pageSize
   }
 
+  // getting value users from data.json
   loadUsers() {
     this.userService.getUsers().subscribe((data) => {
       this.dataSource.data = data;
