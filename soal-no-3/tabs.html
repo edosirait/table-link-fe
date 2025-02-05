@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, intial-scale=1.0">
+    <title>Exam Tabs</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ccc;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            background-color: #f9f9f9;
+        }
+        .tab.active {
+            color: blue;
+            font-weight: bold;
+            background-color: white;
+        }
+        .tab-panel {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tabs">
+        <div class="tab active" data-tab="1">Tab 1</div>
+        <div class="tab" data-tab="2">Tab 2</div>
+        <div class="tab" data-tab="3">Tab 3</div>
+    </div>
+
+    <div class="tab-panel active" data-panel="1">
+        <p>Content Tab 1</p>
+    </div>
+    <div class="tab-panel" data-panel="2">
+        <p>Content Tab 2</p>
+    </div>
+    <div class="tab-panel" data-panel="3">
+        <p>Content Tab 3</p>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const panels = document.querySelectorAll('.tab-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+
+                tab.classList.add('active');
+
+                const targetPanel = document.querySelector(`.tab-panel[data-panel= "${tab.dataset.tab}"]`);
+                targetPanel.classList.add('active');
+            })
+        })
+    </script>
+</body>
+</html>

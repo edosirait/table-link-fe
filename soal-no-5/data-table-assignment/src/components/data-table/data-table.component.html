@@ -1,0 +1,51 @@
+<div class="filter-container">
+  <mat-form-field appearance="outline">
+    <mat-label>Search by Name</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Type your search">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Items per page</mat-label>
+    <mat-select [value]="pageSize" (selectionChange)="updatePageSize($event.value)">
+      <mat-option
+        *ngFor="let size of [5, 10, 20]"
+        value="size"
+      >
+        {{size}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let user">{{user.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let user">{{user.name}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="age">
+    <th mat-header-cell *matHeaderCellDef>Age</th>
+    <td mat-cell *matCellDef="let user">{{user.age}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="occupation">
+    <th mat-header-cell *matHeaderCellDef>Occupation</th>
+    <td mat-cell *matCellDef="let user">{{user.occupation}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator
+  *ngIf="dataSource"
+  [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+  aria-label="Select Page"
+>
+</mat-paginator>
